@@ -73,3 +73,5 @@ function writeYourGenres() {
 
 writeYourGenres();
 console.log(personalMovieDB.genres);
+
+lolkek
