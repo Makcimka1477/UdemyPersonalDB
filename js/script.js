@@ -14,7 +14,7 @@ let number = start();
 
 
 let personalMovieDB = {
-    count: number    ,
+    count: number,
     movies: {},
     actors: {},
     genres: [],
