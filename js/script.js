@@ -1,26 +1,15 @@
 "use strict";
-let numberOfFilms;
- 
-// function start(callback) {
-//     while (!numberOfFilms) {
-//         numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
-//     }
-//     // callback();
-//     return numberOfFilms;
-// }
-
 
 let personalMovieDB = {
-    count: numberOfFilms,
+    count: 0,
     movies: {},
     actors: {},
     genres: [],
     privat: false,
     start : function(callback) {
-        while (!numberOfFilms) {
-            numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+        while (personalMovieDB.count === 0) {
+            personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
         }
-        personalMovieDB.count = numberOfFilms;
     },
 
     rememberMyFilms: function(num, callback) {
@@ -55,33 +44,40 @@ let personalMovieDB = {
         } 
     },
 
-    writeYourGenres: function() {
-        let genre;
-        for (let i = 0; i <= 2; i++) {
-            genre = prompt(`Ваш любимый жанр под номером ${i + 1}`);        
-            while (!genre) {
-                genre = prompt(`Ваш любимый жанр под номером ${i + 1}`);   
-            }
-        personalMovieDB.genres[i] = genre;
-        }
-        personalMovieDB.genres.forEach(function(element, num , array){
-            console.log(`Любимый жанр #${num + 1} - это ${element}`);
-        });
-    },
-
     toggleVisibleMyDB: function() {
-        if (!personalMovieDB.privat) {
-            personalMovieDB.privat = true;
-        } else {
+        if (personalMovieDB.privat) {
             personalMovieDB.privat = false;
+        } else {
+            personalMovieDB.privat = true;
         }
     },
 
-};
+    writeYourGenres: function() {
+        for (let i = 1; i < 4; i++) {
+            personalMovieDB.genres[i - 1] = prompt(`Ваш любимый жанр под номером ${i}`).toLowerCase();
+            while (!personalMovieDB.genres[i - 1]) {
+                console.log(`Вы ввели некорректные данные, ответьте на вопрос еще раз!`);
+                personalMovieDB.genres[i - 1] = prompt(`Ваш любимый жанр под номером ${i}`);
+            }
+         
+        //  Через метод sort() и split();
+        // for (let i = 1; i < 2; i++){
+            // let genres = prompt('Введите ваши любимые жанры через запятую!');
+            
+            // if (!genres || genres.indexOf(',') === -1) {
+            //         console.log(`Вы ввели некорректные данные, ответьте на вопрос еще раз!`);
+            //     i--;
+            // } else {
+            //     personalMovieDB.genres = genres.split(', ');
+            //     personalMovieDB.genres.sort();    
+            // }
+        // }
 
-personalMovieDB.writeYourGenres();
 
-console.log(personalMovieDB);
 
-// writeYourGenres();
-// console.log(personalMovieDB.genres);
+        }
+            personalMovieDB.genres.forEach(function(element, num , array){
+                console.log(`Любимый жанр #${num + 1} - это ${element}`);
+            });
+        }
+    };
